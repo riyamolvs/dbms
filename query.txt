@@ -1,0 +1,25 @@
+create table dept33 (dept_id int primary key,dept_name varchar(20) not null,dept_location varchar(20));
+
+create table emp33(emp_id int primary key,emp_name varchar(20) not null,sal decimal(12,2) check(sal>20000),emp_join DATE check(emp_join >= DATE '1998-06-01'),dept_id int,foreign key(dept_id) references dept33(dept_id));
+
+CREATE TABLE supprt33 (s_id int PRIMARY KEY,emp_id int,dept_id int,STATUS VARCHAR(3) CHECK (STATUS IN ('YES', 'NO')),FOREIGN KEY (emp_id) REFERENCES emp33(emp_id),FOREIGN KEY (dept_id) REFERENCES dept33(dept_id));
+
+
+select column_name, data_type, nullable AS is_null, column_id AS column_key FROM user_tab_columns WHERE table_name = 'DEPT33';
+
+select column_name, data_type, nullable AS is_null, column_id AS column_key FROM user_tab_columns WHERE table_name = 'EMP33';
+
+select column_name, data_type, nullable AS is_null, column_id AS column_key FROM user_tab_columns WHERE table_name = 'SUPPRT33';
+
+
+alter table emp33 add emp_email varchar(100);
+
+drop table supprt33;
+
+alter table emp33 modify sal decimal(12,2);
+
+insert into dept33 (dept_id,dept_name,dept_location) values(101,'mca','delhi');
+insert into dept33 (dept_id,dept_name,dept_location) values(102,'mba','noida');
+insert into dept33 (dept_id,dept_name,dept_location) values(103,'m.tech','agra');
+insert into dept33 (dept_id,dept_name,dept_location) values(104,'b.tech','hyderabad');
+insert into dept33 (dept_id,dept_name,dept_location) values(105,'eee','kerala');
