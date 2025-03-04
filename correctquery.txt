@@ -1,0 +1,76 @@
+1)
+
+create table department93 (dept_id int primary key, dept_name varchar(20) not null, dept_loc varchar (25));
+
+2)
+
+create table empl93(emp_id int primary key,emp_name varchar(20) not null,sal decimal(12,2) check(sal>20000),emp_join DATE check(emp_join >= DATE '1998-06-01'),dept_id int,foreign key(dept_id) references department93(dept_id));
+
+3)
+
+create table support93(s_id number primary key, emp_id int, dept_id int, status varchar(3) check (status in('yes','no')),foreign key(emp_id) references empl93(emp_id),foreign key(dept_id) references department93(dept_id));
+
+4)
+
+desc department93;
+desc empl93;
+desc support93;
+
+5)
+
+alter table empl93 add emp_email varchar(100);
+
+6)
+
+drop table support93;
+
+7)
+
+alter table empl93 modify sal decimal (12,2);
+
+8)
+
+insert into department93 values (101,'HR','New york');
+insert into department93 values (102,'tester','UK');
+insert into department93 values (103,'manager','UAE');
+insert into department93 values (104,'finace','US');
+insert into department93 values (105,'developer','LANDON');
+
+9)
+
+INSERT INTO empl93 (emp_id, emp_name, sal, emp_join, dept_id) VALUES (1, 'Rohith', 60000, TO_DATE('2021-05-15', 'YYYY-MM-DD'),101);
+
+10)
+
+INSERT INTO empl93 (emp_id, emp_name, sal, emp_join, dept_id) VALUES (2, 'sajitha', 50000, TO_DATE('2021-05-16', 'YYYY-MM-DD'),102);
+INSERT INTO empl93 (emp_id, emp_name, sal, emp_join, dept_id) VALUES (3, 'riya', 40000, TO_DATE('2021-05-17', 'YYYY-MM-DD'),103);
+INSERT INTO empl93 (emp_id, emp_name, sal, emp_join, dept_id) VALUES (4, 'sana', 70000, TO_DATE('2021-05-18', 'YYYY-MM-DD'),104);
+
+11)
+
+update empl93 set sal = sal*1.10 where emp_id = 1;
+
+12)
+
+delete from empl93 where emp_id = 1;
+
+13)
+
+update empl93 set sal = sal*1.10 where dept_id = 101 and sal < 50000;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
