@@ -1,0 +1,16 @@
+select emp_id,emp_name,sal from emplo93;
+select emp_name,sal,emp_join from emplo93 where sal>50000;
+select * from emplo93 order by sal DESC;
+select emp_name,sal from emplo93 where emp_join > date'2020-01-01';
+select * from emplo93 where emp_name like 's%';
+select emp_name,sal from emplo93 where sal between 40000 and 60000;
+select dept_id,sum(sal) as total_salary from emplo93 group by dept_id;
+select dept_id,avg(sal) as avg_salary from emplo93 group by dept_id having avg(sal)>60000;
+select dept_id, COUNT(*) as high_earners FROM emplo93 where sal >50000 GROUP BY dept_id;
+select dept_id, count(*) as emp_count from emplo93 group by dept_id having count(*)>3;
+select e.emp_name,e.sal from emplo93 e where e.sal>(select avg (sal)from emplo93 where dept_id=e.dept_id); 
+select emp_name from emplo93 where sal>(select max(sal)from emplo93 where dept_id=102);
+
+select d.dept_name from depart93 where d.dept_id=(select dept_id from emplo93 group by dept_id order by sum(sal)DESC LIMIT 1);-----x
+
+select emp_id,emp_name from emplo93 where dept_id in (select dept_id from emplo93 group by dept_id having count(*)<10);
