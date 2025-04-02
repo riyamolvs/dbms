@@ -1,0 +1,164 @@
+SQL> SELECT e.emp_name, d.dept_name
+FROM emplo93 e
+INNER JOIN depart93 d ON e.dept_id = d.dept_id;
+  2    3  
+EMP_NAME	     DEPT_NAME
+-------------------- --------------------
+john dee	     HR
+sajitha 	     tester
+riya		     manager
+sana		     finace
+
+SQL> SELECT e.emp_name, d.dept_name
+FROM emplo93 e
+LEFT JOIN depart93 d ON e.dept_id = d.dept_id;  2    3  
+
+EMP_NAME	     DEPT_NAME
+-------------------- --------------------
+john dee	     HR
+sajitha 	     tester
+riya		     manager
+sana		     finace
+
+SQL> SELECT d.dept_name, e.emp_name
+FROM depart93 d
+RIGHT JOIN emplo93 e ON d.dept_id = e.dept_id;
+  2    3  
+DEPT_NAME	     EMP_NAME
+-------------------- --------------------
+HR		     john dee
+tester		     sajitha
+manager 	     riya
+finace		     sana
+
+SQL> SELECT d.dept_name, e.emp_name
+FROM depart93 d
+RIGHT JOIN emplo93 e ON d.dept_id = e.dept_id;
+  2    3  
+DEPT_NAME	     EMP_NAME
+-------------------- --------------------
+HR		     john dee
+tester		     sajitha
+manager 	     riya
+finace		     sana
+
+SQL> SELECT e.emp_name, d.dept_name
+FROM emplo93 e
+FULL OUTER JOIN depart93 d ON e.dept_id = d.dept_id;  2    3  
+
+EMP_NAME	     DEPT_NAME
+-------------------- --------------------
+john dee	     HR
+sajitha 	     tester
+riya		     manager
+sana		     finace
+		     developer
+
+SQL> SELECT emp_name, emp_join
+FROM emplo93
+WHERE emp_join < DATE '2010-01-01'
+
+UNION
+
+SELECT emp_name, emp_join
+FROM emplo93
+WHERE emp_join > DATE '2018-12-31';
+  2    3    4  SQL> SP2-0042: unknown command "UNION" - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0042/
+SQL> SQL>   2    3  
+EMP_NAME	     EMP_JOIN
+-------------------- ---------
+john dee	     15-MAY-21
+sajitha 	     16-MAY-21
+sana		     18-MAY-21
+riya		     17-MAY-21
+
+SQL> SELECT emp_name
+FROM emplo93
+WHERE sal >= 40000
+
+INTERSECT
+
+SELECT emp_name
+FROM emplo93
+WHERE sal <= 50000;  2    3    4  SQL> SP2-0042: unknown command "INTERSECT" - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0042/
+SQL> SQL>   2    3  
+
+EMP_NAME
+--------------------
+sajitha
+riya
+
+SQL> SELECT dept_name
+FROM depart93
+
+EXCEPT
+
+SELECT dept_name
+FROM depart93
+WHERE location = 'Ernakulam';  2    3  SQL> SP2-0042: unknown command "EXCEPT" - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0042/
+SQL> SQL>   2    3  
+WHERE location = 'Ernakulam'
+      *
+ERROR at line 3:
+ORA-00904: "LOCATION": invalid identifier
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+
+SQL> SELECT dept_name
+FROM depart93
+
+EXCEPT
+
+SELECT dept_name
+FROM depart93
+WHERE location = 'Ernakulam';  2    3  SQL> SP2-0042: unknown command "EXCEPT" - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0042/
+SQL> SQL>   2    3  
+WHERE location = 'Ernakulam'
+      *
+ERROR at line 3:
+ORA-00904: "LOCATION": invalid identifier
+Help: https://docs.oracle.com/error-help/db/ora-00904/
+
+
+SQL> SQL>SELECT dept_name
+FROM depart93
+
+EXCEPT
+
+SELECT dept_name
+FROM depart93
+WHERE  dept_loc = 'Ernakulam';SP2-0734: unknown command beginning "SQL>SELECT..." - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0734/
+SQL> SP2-0734: unknown command beginning "FROM depar..." - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0734/
+SQL> SQL> SP2-0042: unknown command "EXCEPT" - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0042/
+SQL> SQL>   2    3   
+
+no rows selected
+
+SQL> insert into depart93 values (120,'HR','Ernakulam');
+
+1 row created.
+
+SQL> SELECT dept_name
+FROM depart93
+
+EXCEPT
+
+SELECT dept_name
+FROM depart93
+WHERE  dept_loc = 'Ernakulam';  2    3  SQL> SP2-0042: unknown command "EXCEPT" - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0042/
+SQL> SQL>   2    3  
+
+DEPT_NAME
+--------------------
+HR
+
+
+
